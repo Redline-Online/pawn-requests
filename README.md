@@ -1,5 +1,7 @@
 # pawn-requests
 
+[![Build status](https://ci.appveyor.com/api/projects/status/x642kqc3xf56xf1r/branch/master?svg=true)](https://ci.appveyor.com/project/TemaSM/pawn-requests/branch/master)
+
 [![GitHub](https://shields.southcla.ws/badge/sampctl-pawn--requests-2f2f2f.svg?style=for-the-badge)](https://github.com/Southclaws/pawn-requests)
 
 This package provides an API for interacting with HTTP(S) APIs with support for
@@ -410,7 +412,7 @@ then building the project. You will need to pull the dependencies too so make
 sure you've done `git submodule init && git submodule update` or cloned the
 repository recursively.
 
-Once you've done that, the .dll files will be in `./test/plugins/Debug`. There
+Once you've done that, the .dll files will be in `./build/plugins/Debug`. There
 is also a `-release` suffixed version of this make command for testing the
 release binaries.
 
@@ -425,7 +427,7 @@ sure Docker is installed and run:
 make build-linux
 ```
 
-Which will output `requests.so` to `./test/plugins`. To run unit tests on Linux,
+Which will output `requests.so` to `./build/plugins`. To run unit tests on Linux,
 run:
 
 ```powershell

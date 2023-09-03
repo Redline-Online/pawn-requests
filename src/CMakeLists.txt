@@ -49,7 +49,7 @@ add_custom_command(
     TARGET requests POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
 		${CMAKE_BINARY_DIR}/lib/requests.dll
-		${CMAKE_SOURCE_DIR}/test/plugins/requests.dll)
+		${CMAKE_SOURCE_DIR}/build/plugins/requests.dll)
 endif()
 
 conan_target_link_libraries(requests)

@@ -1,0 +1,42 @@
+version: '{branch}-{build}'
+
+platform: x86
+clone_depth: 1
+
+image:
+  # TODO: check and fix
+  # - Visual Studio 2019
+  - Ubuntu2004
+
+environment:
+  global:
+    CMAKE_BUILD_PARALLEL_LEVEL: 2
+  matrix:
+    - BUILD_TYPE: Release
+    # - BUILD_TYPE: Debug
+
+install:
+  # initialize all submodules
+  - git submodule update --init --recursive
+  # Linux: install multilib compilers
+  - sh: sudo apt-get -qq update
+  - sh: sudo apt-get -qq -y install g++-multilib gcc-multilib
+  - sh: pip install conan==1.60.0
+  - sh: source ~/.profile
+  - sh: "echo g++ version: $(g++ --version | cut -d$'\n' -f1)"
+  # set CMake platform arg on MSVC
+  - ps: |
+      if ($isWindows) {
+        $CMAKE_ARGS = "-AWin32", "-Thost=x86"
+      } else {
+        $CMAKE_ARGS = "-DCMAKE_CXX_FLAGS=-m32", "-DCMAKE_C_FLAGS=-m32"
+      }
+
+build_script:
+  - cmd: mkdir build
+  - ps: cmake -Wno-dev -DCMAKE_BUILD_TYPE="$env:BUILD_TYPE" @CMAKE_ARGS -S . -B build
+  - ps: cmake --build build --config $env:BUILD_TYPE
+
+artifacts:
+  - path: 'build/plugins/**/*'
+  - path: 'build/lib/*'

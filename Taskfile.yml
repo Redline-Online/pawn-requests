@@ -16,7 +16,7 @@ tasks:
     dir: releases/linux
     cmds:
       - mkdir -p {plugins,includes}
-      - cp ../../test/plugins/requests.so ./plugins/requests.so
+      - cp ../../build/plugins/requests.so ./plugins/requests.so
       - cp ../../*.inc ./includes
       - 7z a -r ../pawn-requests-linux.zip *
 
@@ -24,7 +24,7 @@ tasks:
     dir: releases/windows
     cmds:
       - mkdir -p {plugins,includes}
-      - cp ../../test/plugins/requests.dll ./plugins/requests.dll
+      - cp ../../build/plugins/requests.dll ./plugins/requests.dll
       - cp ../../*.inc ./includes
       - 7z a -r ../pawn-requests-windows.zip *
 
